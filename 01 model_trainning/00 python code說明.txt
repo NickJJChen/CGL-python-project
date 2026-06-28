@@ -1,0 +1,20 @@
+建立兩個虛擬環境env_gpu跟env_new
+純CPU運算在env_new下執行，VS code-->Ctrl+Shift+P-->Python: Select Interpreter-->Enter interpreter path-->find-->C:\Users\User\env_new\Scripts\python.exe
+使用GPU需在env_gpu下執行，VS code-->Ctrl+Shift+P-->Python: Select Interpreter-->Enter interpreter path-->find-->C:\Users\User\env_gpu\Scripts\python.exe
+
+01.py		輸入資料置於data資料夾，以XGBoost進行機器學習的數據預處理與特徵重要性分析，利用 XGBoost 模型找出哪些變數對目標Slope影響最大，並繪出前15排名及前10熱力圖。
+02.py		分拆trainning data及testing data，分群'CQ_Group', 'CF_Group', 'Other_Group'並計算R2 score、MAE及繪出殘差分佈圖。
+03.py		CQ_Group再分拆工輥尺寸<或>500mm兩模型，'CQ_Small_Group', 'CQ_Large_Group', 'CF_Group', 'Other_Group'。
+04.py		加入RMSE計算。
+05.py		load_all_data函式改joblib 平行處理讀取，分群標記改用向量化條件判斷，提升資料清理速度。
+06.py		針對CQ_Large_Group啟動殘差修正模型；資料清洗的部份加入條件[['Rolling Force'] > 0, ['Leveling Memory'] >= 0, ['Line Speed'] > 20]
+07.py		可讀取新資料格式(LMI)，比舊格式在最後倒數第二格多一欄(名稱待確認)；使用 Label Encoding 取代 One-Hot Encoding(修改get_dummies轉換為category類型
+08.py		建立分批增量訓練機制、多核心並行載入與清洗、模型與指標自動化儲存、自動繪圖並歸檔(xgboost版本3.3.0)(須在env_new下執行)
+09.py		延續08.py功能，xgboost降版至1.7.6，目前可用GPU執行模型訓練(須在env_gpu下執行)
+10.py		以08.py為底，修改'CQ_Large_Group'訓練方式，由兩個層級（Level）組成，如同一個兩階段的決策系統，
+		Level 0 (基底模型層)：
+		XGBoost Regressor：擅長捕捉資料中的數值非線性關係，對異常值有較好的魯棒性。
+		CatBoost Regressor：針對類別特徵處理能力極強，能有效降低過擬合。
+		這兩個模型在同一個訓練集 (X_train) 上各自獨立訓練。
+		Level 1 (Meta 模型層)：
+		Linear Regression：擔任「裁判」的角色。它不直接看原始特徵，而是學習如何將上述兩個模型的「預測輸出」加權結合，產生最終預測。

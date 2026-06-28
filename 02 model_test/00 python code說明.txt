@@ -1,0 +1,9 @@
+01 model_test.py	GUI選擇測試數據檔、模型資料夾、欄位名稱檔，自動依據鋼種選擇對應模型進行預測，並將前10筆預測值顯示於下方執行結果區。
+02 model_test.py	無GUI，直接顯示預測結果。
+03 model_test.py	延續02 model test.py將結果另存成CSV檔。
+04 model_test.py	依據06 model test.py功能，建立UI。
+05 model_test.py	延續04 model test.py功能，將結果繪出曲線。
+06 model_test.py	自動依據輸入數據檔的鋼種選擇對應模型進行預測，並將結果印出，並另存成CSV檔。
+07 model_test.py	新預測值加入移動平均。
+08 model_test.py	延續02 model test.py將模型由.json改為.pkl。
+09 model_test.py	整合07 model_test.py與08 model_test.py功能，目前可使用.json或.pkl進行預測，在同一資料夾內，以.json為優先。
