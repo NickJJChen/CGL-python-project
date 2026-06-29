@@ -1,3 +1,8 @@
+打包執行檔
+方案 A：打包成「單一資料夾」pyinstaller --onedir --noconsole "xxxxxxx.py"
+方案 B：打包成「單一獨立 .exe 檔案」pyinstaller --onefile --noconsole "xxxxxxx.py"
+
+
 01 model_test.py	GUI選擇測試數據檔、模型資料夾、欄位名稱檔，自動依據鋼種選擇對應模型進行預測，並將前10筆預測值顯示於下方執行結果區。
 02 model_test.py	無GUI，直接顯示預測結果。
 03 model_test.py	延續02 model test.py將結果另存成CSV檔。

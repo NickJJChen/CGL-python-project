@@ -1,3 +1,7 @@
+打包執行檔
+方案 A：打包成「單一資料夾」pyinstaller --onedir --noconsole "xxxxxxx.py"
+方案 B：打包成「單一獨立 .exe 檔案」pyinstaller --onefile --noconsole "xxxxxxx.py"
+
 建立兩個虛擬環境env_gpu跟env_new
 純CPU運算在env_new下執行，VS code-->Ctrl+Shift+P-->Python: Select Interpreter-->Enter interpreter path-->find-->C:\Users\User\env_new\Scripts\python.exe
 使用GPU需在env_gpu下執行，VS code-->Ctrl+Shift+P-->Python: Select Interpreter-->Enter interpreter path-->find-->C:\Users\User\env_gpu\Scripts\python.exe
