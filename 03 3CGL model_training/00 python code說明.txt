@@ -1,0 +1,7 @@
+03 3CGL model_training 子專案說明
+
+資料來源路徑：C:\Users\User\Desktop\01 python test\05 3CGL\data_new
+欄位定義檔：C:\Users\User\Desktop\01 python test\05 3CGL\title01.txt（56 欄，含 LMI 格式之 test 欄位）
+
+01.py	以 XGBoost 依資料夾月份（YYYYMM，單次匯入整月數據）分批增量訓練（結果疊代入下一月訓練）進行數據預處理與特徵重要性分析，找出對目標 Slope 影響最大的變數，輸出前 15 名特徵重要性排名圖、前 10 名相關性熱力圖及完整排名 CSV 至 outputs/ 資料夾。
+01_01.py	延續 01.py 按月全特徵相關性分析後，僅保留離散型／設備規格特徵（Coater Number、W/R DIAMETER、Material、AnnCode、test）輸出重要性排名圖、相關性熱力圖與類別數統計 CSV，作為分群設計依據。
