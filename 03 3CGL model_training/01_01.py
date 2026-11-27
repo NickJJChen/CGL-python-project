@@ -200,6 +200,12 @@ def main() -> None:
         default=30_000,
         help="每月保留用於相關性熱力圖的抽樣筆數",
     )
+    parser.add_argument(
+        "--device",
+        choices=["cpu", "cuda"],
+        default="cpu",
+        help="XGBoost 運算裝置 (cpu 或 cuda，預設 cpu)",
+    )
     parser.add_argument("--show", action="store_true", help="執行時顯示互動式圖表視窗")
     args = parser.parse_args()
 
@@ -260,6 +266,7 @@ def main() -> None:
             learning_rate=0.1,
             max_depth=6,
             tree_method="hist",
+            device=args.device,
             n_jobs=-1,
             random_state=42,
         )
