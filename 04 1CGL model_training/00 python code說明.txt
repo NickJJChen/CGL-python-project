@@ -1,0 +1,9 @@
+04 1CGL model_training 子專案說明
+
+資料來源路徑：C:\Users\User\Desktop\01 python test\01 1CGL\data
+欄位定義檔：title.txt（31 欄，1CGL 產線欄位格式）
+
+01.py	以 XGBoost 依資料夾月份（YYYYMM，單次匯入整月數據）分批增量訓練（結果疊代入下一月訓練）進行數據預處理與特徵重要性分析，針對目標 Slope 與 Crown 各自找出影響最大的變數，輸出前 15 名特徵重要性排名圖、前 10 名相關性熱力圖及完整排名 CSV 至 outputs/ 資料夾。
+01_01.py	延續 01.py 按月全特徵分析後，僅保留離散型／鋼捲訂單規格／設備規格特徵（Coater Number、Material、Order Thickness、Order Width、SPM TOP WR DIAMETER、SPM BOT WR DIAMETER）輸出重要性排名圖、相關性熱力圖與唯一值統計 CSV 至 outputs/ 資料夾，作為分群設計依據。
+02.py	針對目標 SPM BENDER FORCE 進行分群模型訓練與評估（包含未分群基準 All_Single_Group 與依 Material、Order Thickness、Coater Number 切分之 CQ_Thin_Group、CQ_Thick_Coater01、CQ_Thick_Coater2、CF_Group、Other_Group），計算 R²、MAE、RMSE 並輸出評估結果與圖表至 outputs_02/ 資料夾（支援 --device cuda 與 --shuffle-batches）。
+04_1CGL_Colab_Training.ipynb	Google Colab GPU 執行包裝檔（對齊 03_3CGL_Colab_Training.ipynb 流程）：自動掛載 Google Drive 直接讀取雲端資料、從 GitHub 拉取最新程式碼，並以 --device cuda 呼叫 02.py 執行 All_Single_Group（或全部 6 群）模型訓練與結果預覽。
